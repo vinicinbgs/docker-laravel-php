@@ -1,6 +1,6 @@
 ### :whale: DOCKER HUB
 
-**Versão v3** em https://hub.docker.com/repository/docker/vinicinbgs/laravel
+https://hub.docker.com/repository/docker/vinicinbgs/laravel
 
 ### :pencil: Comandos
 <pre>
