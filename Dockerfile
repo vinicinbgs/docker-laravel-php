@@ -1,4 +1,4 @@
-FROM vinicinbgs/laravel:v3
+FROM vinicinbgs/laravel:latest
 RUN apk add  --no-cache openssl bash mysql-client
 RUN docker-php-ext-install pdo pdo_mysql
 
