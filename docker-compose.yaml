@@ -4,8 +4,14 @@ services:
   app:
     build: .
     container_name: app
+    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 40s sh ./.docker/entrypoint.sh
+    environment:
+      - DB_HOST=db
+      - DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
     volumes:
-      - ./laravel:/var/www
+      - .:/var/www
     networks:
       - app-network
     depends_on:
@@ -18,9 +24,13 @@ services:
     restart: always
     tty: true
     ports:
-      - "8000:80"
+      - "8000:3000"
+    entrypoint: dockerize -template /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx -g "daemon off;"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=3000
     volumes:
-      - ./laravel:/var/www
+      - .:/var/www
     networks:
       - app-network
     depends_on:
